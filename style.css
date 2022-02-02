@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    max-height: 100vh;
+}
+
+.content {
+    margin: 0 auto;
+}
+
+
+/* ==== HEADER ====*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #999;
+    width: 40%;
+    padding: 5px;
+}
+
+.question i,
+.mode i{
+    color: #999;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+/* ==== GRILL ====*/
+
+.grill {
+    margin: 130px auto;
+}
+
+.row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item {
+    border: 1px solid #999;
+    min-height: 50px;
+    min-width: 50px;
+    margin: 3px;
+}
+
+
+/*==== KEYBOARD ====*/
+
+.keyboard {
+    width:  30%;
+    margin: 0 auto;
+}
+
+.row-keyboard{
+    display: flex;
+    justify-content: center;
+}
+
+.key {
+    background-color: #ddd;
+    border-radius: 1px;
+    padding: 9px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 3px;
+    cursor: pointer;
+    text-align: center;
+    flex: 1;
+}
+
+
+/*==== RESPONSIVE ====*/
