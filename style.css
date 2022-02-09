@@ -30,6 +30,8 @@ header {
 }
 
 
+h2{font-size: 30px;}
+
 /* ==== GRILL ====*/
 
 .grill {
@@ -81,5 +83,173 @@ header {
 .key:hover{
     background-color: hsl(0, 0%, 80%);
 }
+
+/*==== MODAL INSTRUCTION ====*/
+
+.modal_instruction{
+    background-color: #fff;
+    position: absolute;
+    top:0;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    visibility: visible;
+}
+
+.hide{
+    visibility: hidden;
+}
+
+.animation-in{
+    animation-duration: .5s;
+    animation-name: fade;
+}
+
+@keyframes fade {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+.animation-out{
+    animation-duration: .5s;
+    animation-name: fadeOff;
+}
+
+@keyframes fadeOff {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container{
+    width: 500px;
+    padding: 10px;
+}
+
+.example_grid{
+    display: flex;
+}
+
+.example_cell{
+    border: 1px solid #999;
+    min-height: 50px;
+    min-width: 50px;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.green{
+    color: #fff;
+    background-color: #6AAA64;
+}
+
+.yellow{
+    color: #fff;
+    background-color: #C9B559;
+}
+
+.gray{
+    color: #fff;
+    background-color: #797D7E;
+}
+
+.close{
+    font-weight: 700;
+    color: #999;
+    text-align: right;
+    cursor: pointer;
+}
+
+p{
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+span{
+    font-weight: 700;
+}
+
+h2{
+    font-size: 25px;
+}
+
+h4{
+    margin: 10px 0;
+}
+
+.content-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn_play{
+    font-weight: 500;
+    font-size: 14px;
+    color: #fff;
+    background-color: #6AAA64;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    display: block;
+}
+
+/*==== MESSAGE ====*/
+
+.message{
+    background-color: #ddd;
+    position: absolute;
+    top: 2%;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 20px 50px;
+    border-radius: 10px;
+}
+
+.message p {
+    font-size: 16px;
+}
+
+.msg-animation{
+    animation: zoomIn 1s;
+}
+
+@keyframes zoomIn {
+    from {
+      transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+  }
 
 /*==== RESPONSIVE ====*/

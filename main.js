@@ -89,7 +89,7 @@ function sendWord(){
         }
     } else {
         //Advierte que no se puede mandar
-        console.log('La palabra debe ser de 5 letras')
+        alert('No hay suficientes letras para una palabra')
     }
 
 }
@@ -255,14 +255,53 @@ function endGame(){
 
 /*=== MODAL ===*/
 
-// Eventos Listener al dar click sobre íconos
+const modalInstruction = document.getElementById('modal_instruction')
+const instruction = document.getElementById('instruction')
+const closeBTN = document.getElementById('close')
+const playBTN = document.getElementById('btn_play')
 
-function modalHelper(){
-    // Modal que abre ayuda de la página
+// open modal instruction
+instruction.addEventListener('click', openInstruction)
+
+// open close instruction
+closeBTN.addEventListener('click', closeInstruction)
+
+// open close instruction
+playBTN.addEventListener('click', closeInstruction)
+
+function openInstruction(){
+    modalInstruction.classList.add('animation-in')
+    modalInstruction.classList.remove('animation-out')
+    modalInstruction.classList.remove('hide')
 }
+
+function closeInstruction(){
+    modalInstruction.classList.remove('animation-in')
+    modalInstruction.classList.add('animation-out')
+    setTimeout(() => {
+        modalInstruction.classList.add('hide')
+    }, 400);
+}
+
 
 // Listener click icono opciones
 
-function modalCOnfig(){
+function modalConfig(){
     // Modal que abre configuracion de la página
+}
+
+//== MESSAGE ==//
+
+const messageModal = document.getElementById('message')
+
+function alert(message){
+
+    messageModal.classList.remove('hide')
+    messageModal.classList.add('msg-animation')
+    messageModal.innerHTML= `<p>${message}</p>`
+
+    setTimeout(() => {
+    messageModal.classList.add('hide')
+    messageModal.classList.remove('msg-animation')
+    }, 3000);
 }
