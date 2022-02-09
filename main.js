@@ -1,5 +1,5 @@
 
-//Variables DOM. Faltan ser llamadas.
+//== VARIABLES DEL DOM ==//
 const key = document.querySelectorAll('.keyLetter')
 const send = document.getElementById('key-send')
 const keyDelete = document.getElementById('key-delete')
@@ -9,6 +9,7 @@ const cell_2 = document.querySelectorAll('.cell_2')
 const cell_3 = document.querySelectorAll('.cell_3')
 const cell_4 = document.querySelectorAll('.cell_4')
 
+// objeto con las celdas
 objCell = {}
 objCell[0] = cell_0
 objCell[1] = cell_1
@@ -16,16 +17,18 @@ objCell[2] = cell_2
 objCell[3] = cell_3
 objCell[4] = cell_4
 
+// contadores
 let count = 0;
 let row = 0
+
+// array agrupando letras y palabras
 let wordSelected = []
 let words = []
 
 
+//== LISTENER Y FUNCIONES DEL DOM ==//
 
-//== DOM ==//
-
-// letras del teclado
+// letras del teclado virtual
 key.forEach(each => {
     each.addEventListener('click', e => {
         if(count < 5){
@@ -40,35 +43,82 @@ key.forEach(each => {
     })
 })
 
-// tecla enviar
-send.addEventListener('click', () => {
+
+// letras del teclado físico (hacerlo con keyup para capturar delete)
+document.addEventListener('keypress', e =>{
+
+    // validación
+    if(e.key!=='Enter' && e.key.match(/^[a-zA-Z]+$/)){
+
+        //deja de escribir si la palabra es mayor a 5 letras
+        if(count < 5){
+            wordSelected.push(e.key.toUpperCase());
+            if(wordSelected.length > 0){
+                wordSelected.forEach(letter => {
+                   objCell[row][count].innerText = letter
+                })
+            }
+            count++
+        }
+
+    }
+
+})
+
+
+// tecla delete fisica
+document.addEventListener('keyup', (e)=>{
+
+    if(e.key === 'Backspace'){
+        deleteKey()
+    }
+})
+
+
+// tecla enviar virtual
+send.addEventListener('click', sendWord)
+
+function sendWord(){
+
     if(wordSelected.length === 5){
         words.push(wordSelected.join(''))
         wordSelected = []
         count = 0
-
         if(row < 5){
             row+=1
         }
-        
     } else {
         //Advierte que no se puede mandar
         console.log('La palabra debe ser de 5 letras')
     }
 
+}
 
-})
+//tecla enviar física
+document.addEventListener('keypress', sendWordFisicKey)
+
+function sendWordFisicKey(e){
+    if(e.key === 'Enter'){
+        sendWord()
+    }
+}
+
 
 // tecla borrar
-keyDelete.addEventListener('click', () =>{
+keyDelete.addEventListener('click', deleteKey)
+
+function deleteKey(){
+
     wordSelected.splice(wordSelected.length-1, 1)
     if(count > 0){
         count--
         objCell[row][count].innerText = ''
     }
-})
+
+}
 
 
+//== FUNCIONES LOGICA ==//
 
 // palabra ejemplo para jugar
 const WORD = 'piano'
@@ -216,23 +266,3 @@ function modalHelper(){
 function modalCOnfig(){
     // Modal que abre configuracion de la página
 }
-
-
-/*=== KEYBOARD ===*/
-
-// Eventos al dar click sobre l teclado
-
-function keyboardLetter(){
-    // Seleccion tecla y la coloca en la grilla
-    // Se colorean las letras utilizadas
-}
-
-
-/*=== GRILL ===*/
-
-// Renderizar cada palabra en pantalla con sus colores respectivos
-
-
-/* === API ===*/
-
-// TODO Array con diferentes palabras para seguir jugando (api, diccionario con filter de 5 letras)
