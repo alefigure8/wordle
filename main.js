@@ -1,9 +1,74 @@
 
 //Variables DOM. Faltan ser llamadas.
-const iconConfig;
-const iconHelper;
-const keys;
-const items;
+const key = document.querySelectorAll('.keyLetter')
+const send = document.getElementById('key-send')
+const keyDelete = document.getElementById('key-delete')
+const cell_0 = document.querySelectorAll('.cell_0')
+const cell_1 = document.querySelectorAll('.cell_1')
+const cell_2 = document.querySelectorAll('.cell_2')
+const cell_3 = document.querySelectorAll('.cell_3')
+const cell_4 = document.querySelectorAll('.cell_4')
+
+objCell = {}
+objCell[0] = cell_0
+objCell[1] = cell_1
+objCell[2] = cell_2
+objCell[3] = cell_3
+objCell[4] = cell_4
+
+let count = 0;
+let row = 0
+let wordSelected = []
+let words = []
+
+
+
+//== DOM ==//
+
+// letras del teclado
+key.forEach(each => {
+    each.addEventListener('click', e => {
+        if(count < 5){
+            wordSelected.push(e.target.getAttribute('letter').toUpperCase());
+            if(wordSelected.length > 0){
+                wordSelected.forEach(letter => {
+                   objCell[row][count].innerText = letter
+                })
+            }
+            count++
+        }
+    })
+})
+
+// tecla enviar
+send.addEventListener('click', () => {
+    if(wordSelected.length === 5){
+        words.push(wordSelected.join(''))
+        wordSelected = []
+        count = 0
+
+        if(row < 5){
+            row+=1
+        }
+        
+    } else {
+        //Advierte que no se puede mandar
+        console.log('La palabra debe ser de 5 letras')
+    }
+
+
+})
+
+// tecla borrar
+keyDelete.addEventListener('click', () =>{
+    wordSelected.splice(wordSelected.length-1, 1)
+    if(count > 0){
+        count--
+        objCell[row][count].innerText = ''
+    }
+})
+
+
 
 // palabra ejemplo para jugar
 const WORD = 'piano'
@@ -135,7 +200,7 @@ function endGame(){
 }
 
 //Inicia juego
-entryWord()
+//entryWord()
 
 
 /*=== MODAL ===*/
