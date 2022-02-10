@@ -14,9 +14,9 @@
 <body>
     <header class="content">
         <div class="question" id="instruction"><i class="far fa-question-circle"></i></div>
-        <h2>Wordle (clon)
+        <h2 id="title">Wordle (clon)
         </h2>
-        <div class="mode"><i class="fas fa-cog"></i></div>
+        <div class="mode" id="mode"><i class="fa-solid fa-moon"></i></div>
     </header>
     <main class="content" id="content">
         <div class="grill">
@@ -95,9 +95,10 @@
         </div>
     </div>
 
-    <section class="modal_instruction hide .animation-out" id="modal_instruction">
-
-        <div class="container">
+    <!-- MODAL INSTRUCTION-->
+    <div class="modal hide" id="modal"></div>
+        <div class="modal_instruction hide .animation-out" id="modal_instruction">
+            <div>
                 <div class="header"><div></div><h2>CÓMO JUGAR</h2><div class="close" id="close">X</div></div>
                 <P>Cada intento debe ser una palabra válida de 5 letras.</P>
 
@@ -106,7 +107,7 @@
                 <h4>Ejemplos</h4>
 
                 <div class="example_grid">
-                    <div class="example_cell green">G</div>
+                    <div class="example_cell green" id="green">G</div>
                     <div class="example_cell">A</div>
                     <div class="example_cell">T</div>
                     <div class="example_cell">O</div>
@@ -118,7 +119,7 @@
                 <div class="example_grid">
                     <div class="example_cell">V</div>
                     <div class="example_cell">O</div>
-                    <div class="example_cell yellow">C</div>
+                    <div class="example_cell yellow" id="yellow">C</div>
                     <div class="example_cell">A</div>
                     <div class="example_cell">L</div>
                 </div>
@@ -130,7 +131,7 @@
                     <div class="example_cell">A</div>
                     <div class="example_cell">N</div>
                     <div class="example_cell">T</div>
-                    <div class="example_cell gray">O</div>
+                    <div class="example_cell gray" id="gray">O</div>
                 </div>
 
                 <p>La letra <span>O</span> no está en la palabra.</p>
@@ -139,9 +140,10 @@
                 <div class="content-btn">
                     <button class="btn_play" id="btn_play">¡JUGAR!</button>
                 </div>
+            </div>
         </div>
-    </section>
 
+    <!-- MODAL MESSAGE-->
     <div class="message hide" id="message">
 
     </div>
