@@ -25,6 +25,8 @@ function saveLocalStorage(){
     }
 }
 
+//TODO arreglar storage
+
 function styleDarkMode(){
     // body
     body.classList.toggle('dark_bg')

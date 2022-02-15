@@ -1,7 +1,7 @@
 import {loadModal} from './modal.js'
 import {messageAlert} from './message.js'
 import {loadDarkMode} from './dark_mode.js'
-import {loadKeyboard, wordSelected, words} from './keyboard.js'
+import {loadKeyboard} from './keyboard.js'
 
 
 // loaded
@@ -17,26 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
 const WORD = 'piano'
 
 // Chances (inicia en dos porque el primer prompt es la primera chance)
-let chance = 2;
+let chance = 1;
 
 // objeto contenedor de palabras elegidas por usuario
 const wordObj ={}
+export let actualWord = {}
 
 // muestra prompt
 export function entryWord(userWord){
-    // Si la palabra no está en el objeta lo crea
-    if(!wordObj[userWord]){
 
-        wordObj[userWord] = {word: userWord}
+    // coloca palabra en el objeto
+    wordObj[userWord] = {word: userWord}
 
-        // Validación de la palabra elegida
-        console.log(chance)
-        validateWord(userWord)
-
-    } else {
-        userWord = messageAlert('Ya eleigió esa palabra')
-    }
-
+    // Validación de la palabra elegida
+    console.log(chance)
+    validateWord(userWord)
 }
 
 // TODO, pensar en dividir función
@@ -59,10 +54,10 @@ function validateWord(word){
 
             if(wordObj[word].correct === undefined){
                 // crear array
-                wordObj[word].correct = [splitUserWord[i]]
+                wordObj[word].correct = [{letter: splitUserWord[i], index: i}]
             } else {
                 // concatena con array existente
-                wordObj[word].correct = [...wordObj[word].correct, splitUserWord[i]]
+                wordObj[word].correct = [...wordObj[word].correct, {letter: splitUserWord[i], index: i}]
             }
 
         } else if (indexWord !== -1){
@@ -70,9 +65,9 @@ function validateWord(word){
             // Letra correcta, pero no su posición
 
             if(wordObj[word].position === undefined){
-                wordObj[word].position = [splitUserWord[i]]
+                wordObj[word].position = [{letter: splitUserWord[i], index: i}]
             } else {
-                wordObj[word].position = [...wordObj[word].position, splitUserWord[i]]
+                wordObj[word].position = [...wordObj[word].position, {letter: splitUserWord[i], index: i}]
             }
 
         } else {
@@ -80,9 +75,9 @@ function validateWord(word){
             // letra incorrecta
 
              if(wordObj[word].wrong === undefined){
-                wordObj[word].wrong = [splitUserWord[i]]
+                wordObj[word].wrong = [{letter: splitUserWord[i], index: i}]
             } else {
-                wordObj[word].wrong = [...wordObj[word].wrong, splitUserWord[i]]
+                wordObj[word].wrong = [...wordObj[word].wrong, {letter: splitUserWord[i], index: i}]
             }
         }
     }
@@ -90,18 +85,9 @@ function validateWord(word){
     // Mostrar resultado en pantalla
     showResult()
 
-    // Si las chances son menor a 5 y la palabra no es correcta, vuelve a preguntar
-    //  while(chance < 6 && !wordObj[WORD] || words.length < 6){
-
-    //     //aumenta chance
-    //     chance += 1
-
-    //     // TODO VALIDAR BIEN ESTE WHILE
-    // }
-
-    // Palabra correcta, ganó
-    if(wordObj[WORD]){
-        messageAlert(`Felicidades.La palabra ${WORD} es correcta`)
+    if(chance < 6 && !Object.keys(wordObj).includes(WORD)){
+        //aumenta chance
+        chance += 1
     }
 
     // Más de  5 oportunidades, perdió
@@ -109,6 +95,15 @@ function validateWord(word){
         messageAlert('Perdió')
         endGame()
     }
+
+    // Palabra correcta, ganó
+    if(wordObj[WORD]){
+        messageAlert(`Felicidades.La palabra ${WORD} es correcta`)
+        // TODO deshabilitar teclados
+    }
+
+    // guardar palabra actual con sus detalles
+    actualWord = wordObj[word]
 }
 
 // muestra palabras en pantalla

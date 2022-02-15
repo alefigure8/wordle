@@ -362,4 +362,23 @@ h4{
     border-bottom: 1px solid #414041;
 }
 
+/*=== Color cells ===*/
+.green-key,
+.green-cell{
+    color: #fff;
+    background-color: #6AAA64;
+}
+
+.yellow-key,
+.yellow-cell{
+    color: #fff;
+    background-color: #C9B559;
+}
+
+.gray-key,
+.gray-cell{
+    color: #fff;
+    background-color: #797D7E;
+}
+
 /*==== RESPONSIVE ====*/

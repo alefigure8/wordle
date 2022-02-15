@@ -1,6 +1,6 @@
-import {objCell} from './grid.js'
+import {objCell, renderWord} from './grid.js'
 import {messageAlert} from './message.js'
-import {entryWord} from './main.js'
+import {entryWord, actualWord} from './main.js'
 
 // variables DOM
 const send = document.getElementById('key-send')
@@ -55,13 +55,15 @@ function deleteKeyFisic(e){
 }
 
 
-function sendWord(){
+async function sendWord(){
 
     if(wordSelected.length === 5){
         if(!words.includes(wordSelected.join(''))){
             words.push(wordSelected.join(''))
-            console.log(wordSelected.join('').toLowerCase())
-            entryWord(wordSelected.join('').toLowerCase())
+            // valida palabra
+           await entryWord(wordSelected.join('').toLowerCase())
+            //renderizar colores await
+            await renderWord(actualWord, row)
             wordSelected = []
             count = 0
             if(row < 5){
@@ -69,6 +71,7 @@ function sendWord(){
             }
         } else {
             messageAlert('Ya eligió la palabra')
+            emptyWord()
         }
     } else {
         //Advierte que no se puede mandar
@@ -96,6 +99,15 @@ function deleteKey(){
         objCell[row][count].classList.remove('animate-grill')
     }
 
+}
+
+export function emptyWord(){
+    objCell[row].forEach(cell => {
+        cell.innerText = ''
+        cell.classList.remove('animate-grill')
+    })
+    count = 0
+    wordSelected = []
 }
 
 export function loadKeyboard(){
