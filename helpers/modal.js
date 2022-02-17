@@ -9,6 +9,7 @@ const greenLetter = document.getElementById('green')
 const grayLetter = document.getElementById('gray')
 
 
+// == INSTRUCTION == //
 function openInstruction(){
     modalInstruction.classList.add('animation-in')
     modalInstruction.classList.remove('animation-out')
@@ -54,4 +55,15 @@ export function loadModal(){
 
         // close instruction
         modal.addEventListener('click', closeInstruction)
+}
+
+
+//=== FINAL MODAL ===//
+
+// TODO muestra resultado final en ventana MODAL
+export function endGame(wordObj){
+
+    for (let i in wordObj){
+        console.log(`Palabras usadas: ${wordObj[i].word}`)
+    }
 }

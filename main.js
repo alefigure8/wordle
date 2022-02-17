@@ -1,44 +1,44 @@
-import {loadModal} from './modal.js'
-import {messageAlert} from './message.js'
-import {loadDarkMode} from './dark_mode.js'
-import {loadKeyboard} from './keyboard.js'
+import {loadModal, endGame} from './helpers/modal.js'
+import {messageAlert} from './helpers/message.js'
+import {loadDarkMode} from './helpers/dark_mode.js'
+import {loadKeyboard} from './helpers/keyboard.js'
+import {readLocalStorage} from './helpers/localStorage.js'
+import {loadWord} from './helpers/fetch.js'
 
 
 // loaded
 document.addEventListener('DOMContentLoaded', () => {
     loadModal()
     loadDarkMode()
+    readLocalStorage()
     loadKeyboard()
 })
 
-//== FUNCIONES LOGICA ==//
-
-// palabra ejemplo para jugar
-const WORD = 'piano'
-
-// Chances (inicia en dos porque el primer prompt es la primera chance)
+// oportunidades
 let chance = 1;
 
 // objeto contenedor de palabras elegidas por usuario
 const wordObj ={}
-export let actualWord = {}
 
-// muestra prompt
+
+// guarda palabra en objeto
 export function entryWord(userWord){
 
     // coloca palabra en el objeto
     wordObj[userWord] = {word: userWord}
 
     // Validación de la palabra elegida
-    console.log(chance)
-    validateWord(userWord)
+    return validateWord(userWord)
 }
 
+
 // TODO, pensar en dividir función
-function validateWord(word){
+async function validateWord(word){
 
     // separación de la palabra elegida
     const splitUserWord = word.split('')
+
+    const WORD = await loadWord()
 
     // separación de la palabra correcta
     const splitWord = WORD.split('')
@@ -83,8 +83,6 @@ function validateWord(word){
     }
 
     // Mostrar resultado en pantalla
-    showResult()
-
     if(chance < 6 && !Object.keys(wordObj).includes(WORD)){
         //aumenta chance
         chance += 1
@@ -92,40 +90,26 @@ function validateWord(word){
 
     // Más de  5 oportunidades, perdió
     if(chance > 5){
+
         messageAlert('Perdió')
-        endGame()
+
+        // mostrar resultados
+        endGame(wordObj)
+
     }
 
     // Palabra correcta, ganó
     if(wordObj[WORD]){
+
         messageAlert(`Felicidades.La palabra ${WORD} es correcta`)
-        // TODO deshabilitar teclados
+
+        // TODO deshabilitar teclado
+
+        // mostrar resultados
+        endGame(wordObj)
+
     }
 
     // guardar palabra actual con sus detalles
-    actualWord = wordObj[word]
+   return wordObj[word]
 }
-
-// muestra palabras en pantalla
-function showResult(){
-
-    for (let i in wordObj){
-        console.log(`
-        Palabra: ${wordObj[i].word }
-        Letras correctas: ${wordObj[i].correct?.join(', ')}
-        Posicion incorrecta: ${wordObj[i].position?.join(', ')}
-        Letras incorrectas: ${wordObj[i].wrong?.join(', ')}
-        `)
-    }
-
-}
-
-// muestra resultado final
-function endGame(){
-    for (let i in wordObj){
-        console.log(`Palabras usadas: ${wordObj[i].word}`)
-    }
-}
-
-//Inicia juego
-//entryWord()

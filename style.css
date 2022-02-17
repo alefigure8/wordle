@@ -363,11 +363,6 @@ h4{
 }
 
 /*=== Color cells ===*/
-.green-key,
-.green-cell{
-    color: #fff;
-    background-color: #6AAA64;
-}
 
 .yellow-key,
 .yellow-cell{
@@ -379,6 +374,12 @@ h4{
 .gray-cell{
     color: #fff;
     background-color: #797D7E;
+}
+
+.green-key,
+.green-cell{
+    color: #fff;
+    background-color: #6AAA64;
 }
 
 /*==== RESPONSIVE ====*/

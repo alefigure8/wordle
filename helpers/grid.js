@@ -15,13 +15,14 @@ objCell[4] = cell_4
 
 
 // render colores de grilla y teclado
-export function renderWord(word, row){
-
+export async function renderWord(word, row){
     // correct
     if(word.correct !== undefined){
         word.correct.forEach(letter => {
 
             objCell[row][letter.index].classList.add('green-cell')
+            objCell[row][letter.index].classList.add('animate-grill')
+            objCell[row][letter.index].innerText = letter.letter.toUpperCase()
 
             const keys = document.querySelectorAll('.keyLetter')
             keys.forEach(key => {
@@ -38,6 +39,8 @@ export function renderWord(word, row){
     if(word.position !== undefined){
         word.position.forEach(letter => {
             objCell[row][letter.index].classList.add('yellow-cell')
+            objCell[row][letter.index].classList.add('animate-grill')
+            objCell[row][letter.index].innerText = letter.letter.toUpperCase()
 
             const keys = document.querySelectorAll('.keyLetter')
             keys.forEach(key => {
@@ -52,6 +55,8 @@ export function renderWord(word, row){
     if(word.wrong !== undefined){
         word.wrong.forEach(letter => {
             objCell[row][letter.index].classList.add('gray-cell')
+            objCell[row][letter.index].classList.add('animate-grill')
+            objCell[row][letter.index].innerText = letter.letter.toUpperCase()
 
             const keys = document.querySelectorAll('.keyLetter')
             keys.forEach(key => {
