@@ -1,4 +1,4 @@
-const readStorage = JSON.parse(localStorage.getItem('darkMode'))
+
 const item  = document.querySelectorAll('.item')
 const title  = document.getElementById('title')
 const mode = document.getElementById('mode')
@@ -10,15 +10,20 @@ const keyDelete = document.getElementById('key-delete')
 const header = document.querySelector('header')
 const instruction = document.querySelector('.fa-question-circle')
 
+// lee localstorage
+function readLocalStorage(){
+    return JSON.parse(localStorage.getItem('darkMode'))
+}
+
 // modifica estilos y guarda eleccion
 function darkMode(){
-    styleDarkMode()
     saveLocalStorage()
+    styleDarkMode()
 }
 
 function saveLocalStorage(){
-    // guarda en localStorage
-    if(readStorage == null){
+    const readStorage = readLocalStorage()
+    if(readStorage === null){
         localStorage.setItem('darkMode', true)
     } else {
         localStorage.setItem('darkMode', !readStorage)
@@ -26,7 +31,6 @@ function saveLocalStorage(){
 }
 
 //TODO arreglar storage
-
 function styleDarkMode(){
     // body
     body.classList.toggle('dark_bg')
@@ -46,8 +50,9 @@ function styleDarkMode(){
 export function loadDarkMode(){
     mode.addEventListener('click', darkMode)
 
-    if(readStorage) {
+    // si al cargar página darkmode es true, coloca estilos
+    const readStorage = readLocalStorage()
+    if(readStorage){
         styleDarkMode()
     }
-
 }
