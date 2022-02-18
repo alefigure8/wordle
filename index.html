@@ -22,11 +22,11 @@
     <main class="content" id="content">
         <div class="grill">
             <div class="row">
-                <div class="item cell_0" id="0"></div>
-                <div class="item cell_0" id="1"></div>
-                <div class="item cell_0" id="2"></div>
-                <div class="item cell_0" id="3"></div>
-                <div class="item cell_0" id="4"></div>
+                <div class="item cell_0"></div>
+                <div class="item cell_0"></div>
+                <div class="item cell_0"></div>
+                <div class="item cell_0"></div>
+                <div class="item cell_0"></div>
             </div>
             <div class="row">
                 <div class="item cell_1"></div>
@@ -98,7 +98,7 @@
 
     <!-- MODAL INSTRUCTION-->
     <div class="modal hide" id="modal"></div>
-        <div class="modal_instruction hide .animation-out" id="modal_instruction">
+        <div class="modal_instruction hide animation-out" id="modal_instruction">
             <div>
                 <div class="header"><div></div><h2>CÓMO JUGAR</h2><div class="close" id="close">X</div></div>
                 <P>Cada intento debe ser una palabra válida de 5 letras.</P>
@@ -145,8 +145,11 @@
         </div>
 
     <!-- MODAL MESSAGE-->
-    <div class="message hide" id="message">
+    <div class="message hide" id="message"></div>
 
+     <!-- MODAL INSTRUCTION-->
+     <div class="modal-endgame animation-out" id="modal-endgame">
+        <div class="header"><div></div><h2>WORDLE (ES) 4/6</h2><div class="close" id="close">X</div></div>
     </div>
 
     <script src="main.js" type="module"></script>

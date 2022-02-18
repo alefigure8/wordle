@@ -38,6 +38,7 @@ async function validateWord(word){
     // separación de la palabra elegida
     const splitUserWord = word.split('')
 
+    // carga solución desde fectch
     const WORD = await loadWord()
 
     // separación de la palabra correcta
@@ -82,34 +83,35 @@ async function validateWord(word){
         }
     }
 
-    // Mostrar resultado en pantalla
+    // validación
     if(chance < 6 && !Object.keys(wordObj).includes(WORD)){
-        //aumenta chance
         chance += 1
-    }
-
-    // Más de  5 oportunidades, perdió
-    if(chance > 5){
-
-        messageAlert('Perdió')
-
-        // mostrar resultados
-        endGame(wordObj)
-
-    }
-
-    // Palabra correcta, ganó
-    if(wordObj[WORD]){
-
-        messageAlert(`Felicidades.La palabra ${WORD} es correcta`)
-
-        // TODO deshabilitar teclado
-
-        // mostrar resultados
-        endGame(wordObj)
-
+    } else {
+        validateGame(wordObj[word], WORD)
     }
 
     // guardar palabra actual con sus detalles
-   return wordObj[word]
+    return wordObj[word]
+}
+
+
+function validateGame(userWord, WORD){
+
+    // Palabra correcta, ganó
+    if(chance < 6 && userWord.word === WORD){
+
+        messageAlert(`Felicidades.La palabra ${WORD} es correcta`)
+
+        // mostrar resultados
+        endGame(wordObj)
+
+        // TODO localstorage que guarde las partidas seguidas que se van ganando
+
+        // TODO deshabilitar teclado
+    }
+
+    if(chance > 6 && !userWord.word === WORD) {
+        messageAlert('Perdió')
+        endGame(wordObj)
+    }
 }

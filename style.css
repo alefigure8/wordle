@@ -382,4 +382,16 @@ h4{
     background-color: #6AAA64;
 }
 
-/*==== RESPONSIVE ====*/
+/*=== END GAME MODAL ==*/
+.result-grid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-cell{
+    min-height: 15px;
+    min-width: 15px;
+    margin: 3px;
+}
+

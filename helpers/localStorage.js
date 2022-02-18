@@ -15,6 +15,6 @@ export function readLocalStorage(){
 
 // coloca las palabras del local storage en pantalla
 async function renderLocalStorage(word, countRow){
-   const localWord = await entryWord(word.toLowerCase())
-  await renderWord(localWord, countRow)
+    const localWord = await entryWord(word.toLowerCase())
+    await renderWord(localWord, countRow)
 }

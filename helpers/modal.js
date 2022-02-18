@@ -7,6 +7,8 @@ const modal = document.getElementById('modal')
 const yellowLetter = document.getElementById('yellow')
 const greenLetter = document.getElementById('green')
 const grayLetter = document.getElementById('gray')
+const resultGrid = document.getElementById('result-grid')
+const modalEndgame = document.getElementById('modal-endgame')
 
 
 // == INSTRUCTION == //
@@ -60,10 +62,32 @@ export function loadModal(){
 
 //=== FINAL MODAL ===//
 
+
 // TODO muestra resultado final en ventana MODAL
 export function endGame(wordObj){
+    // console.log(modalEndgame)
+    // for(let i = 0; i < Object.keys(wordObj).length; i++){
 
-    for (let i in wordObj){
-        console.log(`Palabras usadas: ${wordObj[i].word}`)
-    }
+    //     const divResult = document.createElement('div')
+    //     divResult.classList.add('result-grid')
+    //     divResult.innerHTML = `
+    //     <div class="result-cell"></div>
+    //     <div class="result-cell"></div>
+    //     <div class="result-cell"></div>
+    //     <div class="result-cell"></div>
+    //     <div class="result-cell"></div>
+    //     `
+    //     const resultCell = document.querySelectorAll('.result-cell')
+    //     resultCell.forEach((cell, i) => {
+    //         console.log(Object.values(wordObj)[i].correct[i])
+    //     })
+    //     modalEndgame.appendChild(divResult)
+    // }
+
 }
+
+// .forEach(cell => {
+//     const div = document.createElement('div')
+//     div.classList.add('result-cell')
+//     div.classList.add('green-cell')
+//     resultGrid.appendChild(div) })
