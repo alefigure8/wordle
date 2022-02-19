@@ -1,3 +1,5 @@
+import {objCell} from './grid.js'
+
 
 const modalInstruction = document.getElementById('modal_instruction')
 const instruction = document.getElementById('instruction')
@@ -64,30 +66,6 @@ export function loadModal(){
 
 
 // TODO muestra resultado final en ventana MODAL
-export function endGame(wordObj){
-    // console.log(modalEndgame)
-    // for(let i = 0; i < Object.keys(wordObj).length; i++){
-
-    //     const divResult = document.createElement('div')
-    //     divResult.classList.add('result-grid')
-    //     divResult.innerHTML = `
-    //     <div class="result-cell"></div>
-    //     <div class="result-cell"></div>
-    //     <div class="result-cell"></div>
-    //     <div class="result-cell"></div>
-    //     <div class="result-cell"></div>
-    //     `
-    //     const resultCell = document.querySelectorAll('.result-cell')
-    //     resultCell.forEach((cell, i) => {
-    //         console.log(Object.values(wordObj)[i].correct[i])
-    //     })
-    //     modalEndgame.appendChild(divResult)
-    // }
+export async function endGame(wordObj){
 
 }
-
-// .forEach(cell => {
-//     const div = document.createElement('div')
-//     div.classList.add('result-cell')
-//     div.classList.add('green-cell')
-//     resultGrid.appendChild(div) })
