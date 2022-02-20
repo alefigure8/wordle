@@ -12,7 +12,12 @@ const getLocalStorage = localStorage.getItem('board')
 
 // contadores
 let count = 0;
-let row = 0
+let row = InitRow()
+
+// inicia cuenta de row
+export function InitRow() {
+    return getLocalStorage !== null ? JSON.parse(getLocalStorage).length  : 0
+}
 
 // array agrupando letras y palabras
 export let wordSelected = []

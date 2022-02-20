@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadKeyboard()
 })
 
+console.log('Hola')
+
 // oportunidades
 let chance = 1;
 
@@ -99,8 +101,6 @@ function validateGame(userWord, WORD){
 
     // Palabra correcta, ganó
     if(chance < 6 && userWord.word === WORD){
-
-        messageAlert(`Felicidades.La palabra ${WORD} es correcta`)
 
         // mostrar resultados
         endGame(wordObj)

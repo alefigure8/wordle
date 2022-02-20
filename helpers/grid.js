@@ -69,3 +69,19 @@ export async function renderWord(word, row){
     }
 
 }
+
+export function clearCells(){
+    console.log(objCell)
+    cell_0.forEach(cell => {
+        cell.classList.remove('animate-grill')
+        cell.classList.remove('green-cell')
+        cell.classList.remove('yellow-cell')
+        cell.classList.remove('gray-cell')
+        cell.innerHTML = ''
+    })
+    
+}
+
+export function clearKeyBoard(){
+
+}

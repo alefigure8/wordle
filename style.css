@@ -383,6 +383,25 @@ h4{
 }
 
 /*=== END GAME MODAL ==*/
+
+.modal-endgame{
+    position: absolute;
+    top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 450px;
+}
+
+.result-grid-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
 .result-grid{
     display: flex;
     justify-content: center;
@@ -395,3 +414,59 @@ h4{
     margin: 3px;
 }
 
+.subtitle{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.stadistic{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #D4D5D5;
+    padding-bottom: 30px;
+}
+
+.subtitle h3 {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.stadistic p {
+    font-size: 10px;
+    text-align: center;
+}
+
+.number-victory,
+.number-play{
+    font-size: 35px;
+    text-align: center;
+}
+
+.distribution{
+    padding: 20px 0 80px 0;
+}
+
+.dist{
+    font-weight: 300;
+}
+
+.square-result{
+    height: 15px;
+    width: 15px;
+    margin: 3px;
+    background-color: #131212;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#dist_number{
+    display: flex;
+    align-items: center;
+}
+
+.dist_row{
+    display: flex;
+    margin-bottom: 5px;
+}
