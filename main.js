@@ -3,8 +3,6 @@ import {messageAlert} from './helpers/message.js'
 import {loadDarkMode} from './helpers/dark_mode.js'
 import {loadKeyboard} from './helpers/keyboard.js'
 import {readLocalStorage} from './helpers/localStorage.js'
-import {loadWord} from './helpers/fetch.js'
-
 
 // loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,9 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     loadDarkMode()
     readLocalStorage()
     loadKeyboard()
+
+    // save initial time
+    const dateTime = luxon.DateTime.local()
+    const saveTime = dateTime.ts
+
+    // read initial time
+    let time = luxon.DateTime.fromMillis(saveTime)
+    console.log(time)
 })
 
-console.log('Hola')
 
 // oportunidades
 let chance = 1;
