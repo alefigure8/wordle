@@ -2,6 +2,7 @@ import {entryWord} from '../main.js'
 import {renderWord} from './grid.js'
 import {closeInstruction} from './modal.js'
 import {clearCells} from './grid.js'
+import {clearKeyBoard} from './keyboard.js'
 let countRow = 0
 
 const btn_play_again = document.getElementById('btn_play_again')
@@ -32,4 +33,5 @@ btn_play_again.addEventListener('click', () => {
 
     closeInstruction()
     clearCells()
+    clearKeyBoard()
 })

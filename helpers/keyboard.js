@@ -67,6 +67,16 @@ function fisicKeyboard(e){
 }
 
 
+// reset estilos al  teclado virtual
+export function clearKeyBoard(){
+    key.forEach(key => {
+            key.classList.remove('yellow-key')
+            key.classList.remove('green-key')
+            key.classList.remove('gray-key')
+    })
+}
+
+
 // send, teclado virtual
 async function sendWord(){
     if(wordSelected.length === 5){
@@ -144,6 +154,41 @@ function saveWordLocal(){
 
 }
 
+// cambiar estilos al teclado virtual según la palabra elegida
+export function selectedKeys(obj){
+    const keys = document.querySelectorAll('.keyLetter')
+    if(obj.correct !== undefined){
+        obj.correct.forEach(letter => {
+                keys.forEach(key => {
+                    if(key.getAttribute('letter') === letter.letter){
+                        key.classList.remove('yellow-key')
+                        key.classList.add('green-key')
+                    }
+            })
+        })
+    }
+
+    if(obj.position !== undefined){
+        obj.position.forEach(letter => {
+            keys.forEach(key => {
+                if(key.getAttribute('letter') === letter.letter){
+                    key.classList.add('yellow-key')
+                }
+            })
+        })
+    }
+
+    if(obj.wrong !== undefined){
+        obj.wrong.forEach(letter => {
+            keys.forEach(key => {
+                if(key.getAttribute('letter') === letter.letter){
+                    key.classList.add('gray-key')
+                }
+            })
+        })
+    }
+}
+
 export function loadKeyboard(){
 
     // teclas virtuales
@@ -163,5 +208,5 @@ export function loadKeyboard(){
 
     // teclas "enter" y "delete"
     document.addEventListener('keypress', fisicKeyboard)
- 
+
 }

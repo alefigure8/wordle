@@ -1,3 +1,5 @@
+import {selectedKeys} from './keyboard.js'
+
 // variables
 const cell_0 = document.querySelectorAll('.cell_0')
 const cell_1 = document.querySelectorAll('.cell_1')
@@ -13,7 +15,6 @@ objCell[2] = cell_2
 objCell[3] = cell_3
 objCell[4] = cell_4
 
-
 // render colores de grilla y teclado
 export async function renderWord(word, row){
     // correct
@@ -24,13 +25,7 @@ export async function renderWord(word, row){
             objCell[row][letter.index].classList.add('animate-grill')
             objCell[row][letter.index].innerText = letter.letter.toUpperCase()
 
-            const keys = document.querySelectorAll('.keyLetter')
-            keys.forEach(key => {
-                if(key.getAttribute('letter') === letter.letter){
-                    key.classList.remove('yellow-key')
-                    key.classList.add('green-key')
-                }
-            })
+            selectedKeys(word)
 
         })
     }
@@ -42,12 +37,8 @@ export async function renderWord(word, row){
             objCell[row][letter.index].classList.add('animate-grill')
             objCell[row][letter.index].innerText = letter.letter.toUpperCase()
 
-            const keys = document.querySelectorAll('.keyLetter')
-            keys.forEach(key => {
-                if(key.getAttribute('letter') === letter.letter){
-                    key.classList.add('yellow-key')
-                }
-            })
+            selectedKeys(word)
+
         })
     }
 
@@ -58,12 +49,7 @@ export async function renderWord(word, row){
             objCell[row][letter.index].classList.add('animate-grill')
             objCell[row][letter.index].innerText = letter.letter.toUpperCase()
 
-            const keys = document.querySelectorAll('.keyLetter')
-            keys.forEach(key => {
-                if(key.getAttribute('letter') === letter.letter){
-                    key.classList.add('gray-key')
-                }
-            })
+            selectedKeys(word)
 
         })
     }
@@ -71,17 +57,15 @@ export async function renderWord(word, row){
 }
 
 export function clearCells(){
-    console.log(objCell)
-    cell_0.forEach(cell => {
-        cell.classList.remove('animate-grill')
-        cell.classList.remove('green-cell')
-        cell.classList.remove('yellow-cell')
-        cell.classList.remove('gray-cell')
-        cell.innerHTML = ''
+    Object.values(objCell).forEach(cell => {
+        cell.forEach(eachCell => {
+            eachCell.classList.remove('animate-grill')
+            eachCell.classList.remove('green-cell')
+            eachCell.classList.remove('yellow-cell')
+            eachCell.classList.remove('gray-cell')
+            eachCell.innerHTML = ''
+        })
     })
-    
-}
 
-export function clearKeyBoard(){
-
+    // Reiniciar Row
 }
