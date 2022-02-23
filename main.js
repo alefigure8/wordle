@@ -1,8 +1,9 @@
 import {loadModal, endGame} from './helpers/modal.js'
-import {messageAlert} from './helpers/message.js'
 import {loadDarkMode} from './helpers/dark_mode.js'
 import {loadKeyboard} from './helpers/keyboard.js'
 import {readLocalStorage} from './helpers/localStorage.js'
+import {loadWord} from './helpers/fetch.js'
+import { objCell } from './helpers/grid.js'
 
 // loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,13 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     readLocalStorage()
     loadKeyboard()
 
-    // save initial time
-    const dateTime = luxon.DateTime.local()
-    const saveTime = dateTime.ts
+    // // save initial time
+    // const dateTime = luxon.DateTime.local()
+    // const saveTime = dateTime.ts
 
-    // read initial time
-    let time = luxon.DateTime.fromMillis(saveTime)
-    console.log(time)
+    // // read initial time
+    // let time = luxon.DateTime.fromMillis(saveTime)
+    // console.log(time)
 })
 
 
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let chance = 1;
 
 // objeto contenedor de palabras elegidas por usuario
-const wordObj ={}
+let wordObj ={}
 
 
 // guarda palabra en objeto
@@ -60,39 +61,39 @@ async function validateWord(word){
         // Si la letra y la posición coinciden
         if(indexWord !== -1 && splitUserWord[i] === splitWord[i]) {
 
-            if(wordObj[word].correct === undefined){
+            wordObj[word].correct === undefined
+                ?
                 // crear array
                 wordObj[word].correct = [{letter: splitUserWord[i], index: i}]
-            } else {
+                :
                 // concatena con array existente
                 wordObj[word].correct = [...wordObj[word].correct, {letter: splitUserWord[i], index: i}]
-            }
 
         } else if (indexWord !== -1){
 
             // Letra correcta, pero no su posición
-
-            if(wordObj[word].position === undefined){
+            wordObj[word].position === undefined
+                ?
                 wordObj[word].position = [{letter: splitUserWord[i], index: i}]
-            } else {
+                :
                 wordObj[word].position = [...wordObj[word].position, {letter: splitUserWord[i], index: i}]
-            }
 
         } else {
 
             // letra incorrecta
-
-             if(wordObj[word].wrong === undefined){
+            wordObj[word].wrong === undefined
+                ?
                 wordObj[word].wrong = [{letter: splitUserWord[i], index: i}]
-            } else {
+                :
                 wordObj[word].wrong = [...wordObj[word].wrong, {letter: splitUserWord[i], index: i}]
-            }
+
         }
     }
 
     // validación
-    if(chance < 6 && !Object.keys(wordObj).includes(WORD)){
+    if(chance < 6 && !Object.keys(wordObj).includes(WORD)) {
         chance += 1
+        validateGame(wordObj[word], WORD)
     } else {
         validateGame(wordObj[word], WORD)
     }
@@ -102,21 +103,21 @@ async function validateWord(word){
 }
 
 
-function validateGame(userWord, WORD){
+async function validateGame(userWord, WORD){
 
     // Palabra correcta, ganó
-    if(chance < 6 && userWord.word === WORD){
-
-        // mostrar resultados
-        endGame(wordObj)
-
-        // TODO localstorage que guarde las partidas seguidas que se van ganando
-
-        // TODO deshabilitar teclado
+    if (chance < 6 && userWord.word === WORD){
+        const newWordObj = JSON.parse(JSON.stringify(wordObj))
+        await endGame(newWordObj)
+        chance = 1
+        wordObj = {}
     }
 
-    if(chance > 6 && !userWord.word === WORD) {
-        messageAlert('Perdió')
-        endGame(wordObj)
+    // Perdió
+    if (chance > 5 ){
+        const newWordObj = JSON.parse(JSON.stringify(wordObj))
+        await endGame(newWordObj)
+        chance = 1
+        wordObj = {}
     }
 }

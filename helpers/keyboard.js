@@ -10,18 +10,14 @@ const key = document.querySelectorAll('.keyLetter')
 // leer LocalStorage
 const getLocalStorage = localStorage.getItem('board')
 
-// contadores
-let count = 0;
-let row = InitRow()
-
-// inicia cuenta de row
-export function InitRow() {
-    return getLocalStorage !== null ? JSON.parse(getLocalStorage).length  : 0
-}
 
 // array agrupando letras y palabras
 export let wordSelected = []
 export let words = []
+
+// contadores
+let count = 0;
+let row = 0
 
 // Modifica words y row si hay algo en el local storage
 if(getLocalStorage !== null){
@@ -81,6 +77,7 @@ export function clearKeyBoard(){
 async function sendWord(){
     if(wordSelected.length === 5){
         if(!words.includes(wordSelected.join(''))){
+            // guarda palabaras elegidas
             words.push(wordSelected.join(''))
 
             // valida palabra
@@ -94,9 +91,8 @@ async function sendWord(){
 
             wordSelected = []
             count = 0
-            if(row < 5){
-                row+=1
-            }
+            row < 5 && row++
+
         } else {
             messageAlert('Ya eligió la palabra')
             emptyWord()
@@ -110,9 +106,7 @@ async function sendWord(){
 
 // enter, teclado fisico
 function sendWordFisicKey(e){
-    if(e.key === 'Enter'){
-        sendWord()
-    }
+    e.key === 'Enter' && sendWord()
 }
 
 
@@ -128,9 +122,7 @@ function deleteKey(){
 
 // delete teclado fisico
 function deleteKeyFisic(e){
-    if(e.key === 'Backspace'){
-        deleteKey()
-    }
+    e.key === 'Backspace' && deleteKey()
 }
 
 // vaciar celdas si la palabra ya está elegida
@@ -145,13 +137,7 @@ export function emptyWord(){
 
 // guardar palabras en el local storage
 function saveWordLocal(){
-
-    if(getLocalStorage === null){
-        localStorage.setItem('board', JSON.stringify(words))
-    } else {
-        localStorage.setItem('board', JSON.stringify(words))
-    }
-
+   getLocalStorage === null ? localStorage.setItem('board', JSON.stringify(words)) : localStorage.setItem('board', JSON.stringify(words))
 }
 
 // cambiar estilos al teclado virtual según la palabra elegida
@@ -181,12 +167,17 @@ export function selectedKeys(obj){
     if(obj.wrong !== undefined){
         obj.wrong.forEach(letter => {
             keys.forEach(key => {
-                if(key.getAttribute('letter') === letter.letter){
-                    key.classList.add('gray-key')
-                }
+                key.getAttribute('letter') === letter.letter && key.classList.add('gray-key')
             })
         })
     }
+}
+
+// limpia variable de palabras anteriores
+export function emptyArrayWord(){
+    row = 0
+    count = 0
+    words = []
 }
 
 export function loadKeyboard(){
