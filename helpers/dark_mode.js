@@ -23,11 +23,7 @@ function darkMode(){
 
 function saveLocalStorage(){
     const readStorage = readLocalStorage()
-    if(readStorage === null){
-        localStorage.setItem('darkMode', true)
-    } else {
-        localStorage.setItem('darkMode', !readStorage)
-    }
+    readStorage === null ? localStorage.setItem('darkMode', true) : localStorage.setItem('darkMode', !readStorage)
 }
 
 //TODO arreglar storage
@@ -52,7 +48,5 @@ export function loadDarkMode(){
 
     // si al cargar página darkmode es true, coloca estilos
     const readStorage = readLocalStorage()
-    if(readStorage){
-        styleDarkMode()
-    }
+    readStorage && styleDarkMode()
 }

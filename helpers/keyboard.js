@@ -157,9 +157,7 @@ export function selectedKeys(obj){
     if(obj.position !== undefined){
         obj.position.forEach(letter => {
             keys.forEach(key => {
-                if(key.getAttribute('letter') === letter.letter){
-                    key.classList.add('yellow-key')
-                }
+                key.getAttribute('letter') === letter.letter && key.classList.add('yellow-key')
             })
         })
     }

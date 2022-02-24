@@ -1,3 +1,6 @@
+import {calculateTime} from './timer.js'
+
+
 const modalInstruction = document.getElementById('modal_instruction')
 const instruction = document.getElementById('instruction')
 const closeBTN = document.getElementById('close')
@@ -279,17 +282,50 @@ export async function endGame(wordObj){
      dist_3_number.innerHTML = `${squareCells(dist_3_percent * 2)} (${dist_3_percent * 20}%) `
      dist_4_number.innerHTML = `${squareCells(dist_4_percent * 2)} (${dist_4_percent * 20}%) `
 
-     // cuadrados de distribución
-     function squareCells (numb){
-         const squares = []
-        const square =  `<div class="square-result"></div>`
-        for (let i = 1; i <= numb; i++){
-            squares.push(square)
-        }
-        return squares.join('')
-     }
+     // Timer
+     timer()
 
+     // games
+     wonGames()
+
+    // porcentajes
+     percent()
 }
 
-// TODO play again
-// todo localstorage victory
+
+function timer(){
+    const numbTime = calculateTime()
+    const numberTimeDom = document.getElementById('numbertime')
+    const { hours, minutes, seconds } = numbTime
+    numberTimeDom.innerHTML= `${hours > 0 ? hours : '00'}:${minutes > 0 ? minutes : '00'}:${seconds > 0 ? seconds.toFixed(2) : '00'}`
+}
+
+function wonGames(){
+    const localWonGames = localStorage.getItem('wonGames')
+    const localLooseGames = localStorage.getItem('looseGames')
+    const winsDom = document.getElementById('wins')
+    const loosesDom = document.getElementById('loose')
+    winsDom.innerHTML = localWonGames
+    loosesDom.innerHTML = localLooseGames
+}
+
+
+function percent(){
+    const localWonGames = localStorage.getItem('wonGames')
+    const localLooseGames = localStorage.getItem('looseGames')
+    const victory = document.getElementById('victory')
+
+    const totalGames = Number(localWonGames) + Number(localLooseGames)
+    const percentWins = (Number(localWonGames) * 100) / totalGames
+    victory.innerHTML = `${String(percentWins)}%`
+}
+
+// cuadrados de distribución
+function squareCells (numb){
+    const squares = []
+   const square =  `<div class="square-result"></div>`
+   for (let i = 1; i <= numb; i++){
+       squares.push(square)
+   }
+   return squares.join('')
+}

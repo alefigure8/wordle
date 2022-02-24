@@ -1,9 +1,9 @@
 import {loadModal, endGame} from './helpers/modal.js'
 import {loadDarkMode} from './helpers/dark_mode.js'
 import {loadKeyboard} from './helpers/keyboard.js'
-import {readLocalStorage} from './helpers/localStorage.js'
+import {readLocalStorage, points} from './helpers/localStorage.js'
 import {loadWord} from './helpers/fetch.js'
-import { objCell } from './helpers/grid.js'
+import {initTime, endTime} from './helpers/timer.js'
 
 // loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,16 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     loadDarkMode()
     readLocalStorage()
     loadKeyboard()
-
-    // // save initial time
-    // const dateTime = luxon.DateTime.local()
-    // const saveTime = dateTime.ts
-
-    // // read initial time
-    // let time = luxon.DateTime.fromMillis(saveTime)
-    // console.log(time)
+    initTime()
 })
-
 
 // oportunidades
 let chance = 1;
@@ -108,6 +100,8 @@ async function validateGame(userWord, WORD){
     // Palabra correcta, ganó
     if (chance < 6 && userWord.word === WORD){
         const newWordObj = JSON.parse(JSON.stringify(wordObj))
+        await points(true)
+        endTime()
         await endGame(newWordObj)
         chance = 1
         wordObj = {}
@@ -116,6 +110,8 @@ async function validateGame(userWord, WORD){
     // Perdió
     if (chance > 5 ){
         const newWordObj = JSON.parse(JSON.stringify(wordObj))
+        await points(false)
+        endTime()
         await endGame(newWordObj)
         chance = 1
         wordObj = {}

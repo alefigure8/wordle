@@ -164,11 +164,15 @@
 
        <div class="stadistic" id="stadistic">
             <div class="plays">
-                <div class="number-play">1</div>
-                <p>Jugadas</p>
+                <div class="number-play" id="wins">1</div>
+                <p>Ganadas</p>
+            </div>
+            <div class="plays">
+                <div class="number-play" id="loose">1</div>
+                <p>Perdidas</p>
             </div>
             <div class="victory">
-                <div class="number-victory">100%</div>
+                <div class="number-victory" id="victory">100%</div>
                 <p>Victorias</p>
             </div>
         </div>
@@ -182,11 +186,14 @@
             <div class="dist_row">5: <span id="dist_cell"></span><span class="dist" id="dist_number">0</span></div>
         </div>
 
+        <p class="timer" id="timer">Tiempo de juego: <span id="numbertime"></span></p>
+
         <div class="content-btn">
             <button class="btn_play" id="btn_play_again">¡JUGAR DE NUEVO!</button>
         </div>
     </div>
 
     <script src="main.js" type="module"></script>
+    <script src="./library/luxon.js"></script>
 </body>
 </html>
