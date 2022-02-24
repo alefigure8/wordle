@@ -2,8 +2,9 @@ import {loadModal, endGame} from './helpers/modal.js'
 import {loadDarkMode} from './helpers/dark_mode.js'
 import {loadKeyboard} from './helpers/keyboard.js'
 import {readLocalStorage, points} from './helpers/localStorage.js'
-import {loadWord} from './helpers/fetch.js'
 import {initTime, endTime} from './helpers/timer.js'
+import {decrypt} from './helpers/crypt.js'
+import {loadWord} from './helpers/fetch.js'
 
 // loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     readLocalStorage()
     loadKeyboard()
     initTime()
+    loadWord()
 })
 
 // oportunidades
@@ -19,7 +21,6 @@ let chance = 1;
 
 // objeto contenedor de palabras elegidas por usuario
 let wordObj ={}
-
 
 // guarda palabra en objeto
 export function entryWord(userWord){
@@ -38,8 +39,9 @@ async function validateWord(word){
     // separación de la palabra elegida
     const splitUserWord = word.split('')
 
-    // carga solución desde fectch
-    const WORD = await loadWord()
+    // desencripta la solución
+    const solutionWord = await localStorage.getItem('solution')
+    const WORD = await decrypt(solutionWord)
 
     // separación de la palabra correcta
     const splitWord = WORD.split('')

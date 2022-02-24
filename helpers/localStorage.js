@@ -4,6 +4,8 @@ import {closeEndGame} from './modal.js'
 import {clearCells} from './grid.js'
 import {clearKeyBoard, emptyArrayWord} from './keyboard.js'
 import {clearTimeout} from './timer.js'
+import {cleanSolution} from './crypt.js'
+import {loadWord} from './fetch.js'
 
 let countRow = 0
 
@@ -25,20 +27,6 @@ async function renderLocalStorage(word, countRow){
     const localWord = await entryWord(word.toLowerCase())
     await renderWord(localWord, countRow)
 }
-
-//borrar localStorage de palabras
-
-btn_play_again.addEventListener('click', () => {
-
-    const localStorageArray = localStorage.getItem('board')
-    localStorageArray !== null && localStorage.removeItem('board')
-
-    closeEndGame()
-    clearCells()
-    clearKeyBoard()
-    emptyArrayWord()
-    clearTimeout()
-})
 
 // puntaje
 export function points(value){
@@ -71,3 +59,18 @@ export function points(value){
 
 
 }
+
+
+btn_play_again.addEventListener('click', () => {
+
+    const localStorageArray = localStorage.getItem('board')
+    localStorageArray !== null && localStorage.removeItem('board')
+
+    closeEndGame()
+    clearCells()
+    clearKeyBoard()
+    emptyArrayWord()
+    clearTimeout()
+    cleanSolution()
+    loadWord()
+})

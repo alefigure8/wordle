@@ -317,7 +317,7 @@ function percent(){
 
     const totalGames = Number(localWonGames) + Number(localLooseGames)
     const percentWins = (Number(localWonGames) * 100) / totalGames
-    victory.innerHTML = `${String(percentWins)}%`
+    victory.innerHTML = `${String(percentWins.toFixed(0))}%`
 }
 
 // cuadrados de distribución
