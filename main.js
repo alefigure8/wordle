@@ -1,6 +1,6 @@
 import {loadModal, endGame} from './helpers/modal.js'
 import {loadDarkMode} from './helpers/dark_mode.js'
-import {loadKeyboard} from './helpers/keyboard.js'
+import {loadKeyboard, disableKeyboard} from './helpers/keyboard.js'
 import {readLocalStorage, points} from './helpers/localStorage.js'
 import {initTime, endTime} from './helpers/timer.js'
 import {decrypt} from './helpers/crypt.js'
@@ -101,20 +101,32 @@ async function validateGame(userWord, WORD){
 
     // Palabra correcta, ganó
     if (chance < 6 && userWord.word === WORD){
+        // copaia objeto
         const newWordObj = JSON.parse(JSON.stringify(wordObj))
         await points(true)
         endTime()
+        disableKeyboard()
+
+        //modal
         await endGame(newWordObj)
+
+        // reinicia objeto y contador
         chance = 1
         wordObj = {}
     }
 
     // Perdió
     if (chance > 5 ){
+        // copaia objeto
         const newWordObj = JSON.parse(JSON.stringify(wordObj))
         await points(false)
         endTime()
+        disableKeyboard()
+
+        //modal
         await endGame(newWordObj)
+        
+        // reinicia objeto y contador
         chance = 1
         wordObj = {}
     }

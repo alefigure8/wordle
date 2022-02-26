@@ -1,6 +1,7 @@
 import {objCell, renderWord} from './grid.js'
 import {messageAlert} from './message.js'
 import {entryWord} from '../main.js'
+import {decrypt} from './crypt.js'
 
 // variables DOM
 const send = document.getElementById('key-send')
@@ -176,6 +177,16 @@ export function emptyArrayWord(){
     row = 0
     count = 0
     words = []
+}
+
+export async function disableKeyboard(){
+
+    //validar con localstorage y array
+    const solutionWord = await localStorage.getItem('solution')
+    const WORD = await decrypt(solutionWord)
+    const getLocalStorage = JSON.parse(localStorage.getItem('board'))
+    getLocalStorage.includes(WORD.toUpperCase()) ? row = 6 : row
+
 }
 
 export function loadKeyboard(){

@@ -57,15 +57,17 @@ export function points(value){
 
     }
 
+}
 
+function removeWords(){
+    const localStorageArray = localStorage.getItem('board')
+    localStorageArray !== null && localStorage.removeItem('board')
 }
 
 
 btn_play_again.addEventListener('click', () => {
 
-    const localStorageArray = localStorage.getItem('board')
-    localStorageArray !== null && localStorage.removeItem('board')
-
+    removeWords()
     closeEndGame()
     clearCells()
     clearKeyBoard()
