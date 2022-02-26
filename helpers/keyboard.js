@@ -180,13 +180,11 @@ export function emptyArrayWord(){
 }
 
 export async function disableKeyboard(){
-
     //validar con localstorage y array
     const solutionWord = await localStorage.getItem('solution')
     const WORD = await decrypt(solutionWord)
     const getLocalStorage = JSON.parse(localStorage.getItem('board'))
     getLocalStorage.includes(WORD.toUpperCase()) ? row = 6 : row
-
 }
 
 export function loadKeyboard(){

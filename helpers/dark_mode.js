@@ -9,6 +9,9 @@ const send = document.getElementById('key-send')
 const keyDelete = document.getElementById('key-delete')
 const header = document.querySelector('header')
 const instruction = document.querySelector('.fa-question-circle')
+const modalBG = document.getElementById('modal')
+const modalInstruction = document.getElementById('modal_instruction')
+const modalEndGame = document.getElementById('modal-endgame')
 
 // lee localstorage
 function readLocalStorage(){
@@ -40,6 +43,11 @@ function styleDarkMode(){
     // instruction
     modeIcon.classList.toggle('dark_icon')
     instruction.classList.toggle('dark_icon')
+    modalBG.classList.toggle('modal-bg')
+    modalInstruction.classList.toggle('modal_instruction_dark')
+
+    //end game
+    modalEndGame.classList.toggle('dark_font')
 }
 
 

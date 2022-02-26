@@ -9,6 +9,7 @@ export async function loadWordFetch(){
     await encrypt(result.word)
 }
 
+// carga la palabra del fetch
 export async function loadWord(){
     const savedSolution = localStorage.getItem('solution')
     savedSolution !== null ? localStorage.getItem('solution') : await loadWordFetch()

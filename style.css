@@ -335,15 +335,22 @@ h4{
   }
 
 /*==== DARK ====*/
-
+.modal-bg,
 .dark_bg{
+    background-color: #131212;
+}
+
+.modal_instruction_dark{
+    color: #fff;
     background-color: #131212;
 }
 
 .dark_key {
     color: #fff;
-    background-color: #818384;
+    background-color: hsl(200, 1%, 62%);
 }
+
+
 
 .dark_grid {
     border: 2px solid #414041;
@@ -361,6 +368,7 @@ h4{
 .dark_header {
     border-bottom: 1px solid #414041;
 }
+
 
 /*=== Color cells ===*/
 
@@ -381,6 +389,7 @@ h4{
     color: #fff;
     background-color: #6AAA64;
 }
+
 
 /*=== END GAME MODAL ==*/
 
@@ -459,6 +468,10 @@ h4{
     background-color: #131212;
     display: inline-block;
     vertical-align: middle;
+}
+
+.squaresBG {
+    background-color: #D4D5D5;
 }
 
 #dist_number{

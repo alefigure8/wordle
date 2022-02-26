@@ -15,7 +15,8 @@ const modalEndgame = document.getElementById('modal-endgame')
 const dist_number = document.querySelectorAll('.dist')
 
 
-// == INSTRUCTION == //
+// == MODAL INSTRUCTION == //
+
 function openInstruction(){
     modalInstruction.classList.add('animation-in')
     modalInstruction.classList.remove('animation-out')
@@ -80,7 +81,8 @@ export function loadModal(){
 }
 
 
-//=== FINAL MODAL ===//
+
+//=== MODAL FINAL ===//
 
 
 // Final modal
@@ -285,14 +287,14 @@ export async function endGame(wordObj){
      // Timer
      timer()
 
-     // games
+     // points game
      wonGames()
 
     // porcentajes
      percent()
 }
 
-
+// renderiza el tiempo transcurrido en el modal final
 function timer(){
     const numbTime = calculateTime()
     const numberTimeDom = document.getElementById('numbertime')
@@ -300,6 +302,7 @@ function timer(){
     numberTimeDom.innerHTML= `${hours > 0 ? hours : '00'}:${minutes > 0 ? minutes : '00'}:${seconds > 0 ? seconds.toFixed(2) : '00'}`
 }
 
+// renderiza los puntos en el modal final
 function wonGames(){
     const localWonGames = localStorage.getItem('wonGames')
     const localLooseGames = localStorage.getItem('looseGames')
@@ -309,7 +312,7 @@ function wonGames(){
     loosesDom.innerHTML = localLooseGames
 }
 
-
+// renderiza porcentaje en el modal final
 function percent(){
     const localWonGames = localStorage.getItem('wonGames')
     const localLooseGames = localStorage.getItem('looseGames')
@@ -323,7 +326,8 @@ function percent(){
 // cuadrados de distribución
 function squareCells (numb){
     const squares = []
-   const square =  `<div class="square-result"></div>`
+    const darkMode = JSON.parse(localStorage.getItem('darkMode'))
+   const square =  `<div class="square-result ${darkMode && "squaresBG"}"></div>`
    for (let i = 1; i <= numb; i++){
        squares.push(square)
    }

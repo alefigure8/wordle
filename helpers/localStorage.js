@@ -28,7 +28,7 @@ async function renderLocalStorage(word, countRow){
     await renderWord(localWord, countRow)
 }
 
-// puntaje
+// suma puntos en partidas ganadas o perdidas
 export function points(value){
 
     const finalTime = localStorage.getItem('finalTime')
@@ -59,12 +59,13 @@ export function points(value){
 
 }
 
+// remueve array de palabras guardadas en el local storage
 function removeWords(){
     const localStorageArray = localStorage.getItem('board')
     localStorageArray !== null && localStorage.removeItem('board')
 }
 
-
+// botón reiniciar juego. Limpia los datos guardados de la partida anterior
 btn_play_again.addEventListener('click', () => {
 
     removeWords()
