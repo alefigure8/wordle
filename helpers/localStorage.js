@@ -43,6 +43,7 @@ export function points(value){
             localStorage.getItem('wonGames')
         } else { // si no no existe, lo crea
             localStorage.setItem('wonGames', 1)
+            looseGames === null && localStorage.setItem('looseGames', 0)
         }
 
     } else {
@@ -53,6 +54,7 @@ export function points(value){
             localStorage.getItem('looseGames')
         } else { // si no no existe, lo crea
             localStorage.setItem('looseGames', 1)
+            wonGames === null && localStorage.setItem('wonGames', 0)
         }
 
     }

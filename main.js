@@ -5,6 +5,7 @@ import {readLocalStorage, points} from './helpers/localStorage.js'
 import {initTime, endTime} from './helpers/timer.js'
 import {decrypt} from './helpers/crypt.js'
 import {loadWord} from './helpers/fetch.js'
+import {leerarchivo} from './words/function.js'
 
 // loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadKeyboard()
     initTime()
     loadWord()
+    //leerarchivo("./words/WordSolution.txt")
 })
 
 // oportunidades
@@ -42,6 +44,7 @@ async function validateWord(word){
     // desencripta la solución
     const solutionWord = await localStorage.getItem('solution')
     const WORD = await decrypt(solutionWord)
+    console.log(WORD)
 
     // separación de la palabra correcta
     const splitWord = WORD.split('')
