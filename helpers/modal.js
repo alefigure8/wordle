@@ -13,6 +13,7 @@ const grayLetter = document.getElementById('gray')
 const resultGrid = document.querySelectorAll('.result-grid')
 const modalEndgame = document.getElementById('modal-endgame')
 const dist_number = document.querySelectorAll('.dist')
+const linesPlay = document.getElementById('lines')
 
 
 // == MODAL INSTRUCTION == //
@@ -292,6 +293,9 @@ export async function endGame(wordObj){
 
     // porcentajes
      percent()
+
+    //lineas jugadas
+    lines()
 }
 
 // renderiza el tiempo transcurrido en el modal final
@@ -332,4 +336,9 @@ function squareCells (numb){
        squares.push(square)
    }
    return squares.join('')
+}
+
+function lines(){
+    const words = JSON.parse(localStorage.getItem('board'))
+    linesPlay.innerText = words.length
 }
