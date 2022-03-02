@@ -303,7 +303,7 @@ function timer(){
     const numbTime = calculateTime()
     const numberTimeDom = document.getElementById('numbertime')
     const { hours, minutes, seconds } = numbTime
-    numberTimeDom.innerHTML= `${hours > 0 ? hours : '00'}:${minutes > 0 ? minutes : '00'}:${seconds > 0 ? seconds.toFixed(2) : '00'}`
+    numberTimeDom.innerHTML= `${hours > 0 ? hours < 10 ? `0${hours}` : hours : '00'}:${minutes > 0 ? minutes < 10 ? `0${minutes}` : minutes : '00'}:${seconds > 0 ? seconds < 10 ? `0${seconds.toFixed(2)}`: seconds.toFixed(2) : '00'}`
 }
 
 // renderiza los puntos en el modal final
