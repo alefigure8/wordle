@@ -18,6 +18,7 @@ export function leerarchivo(file)
                 const createObj = newArr.map(each =>{
                    return { 'word': each }
                 })
+                console.log(JSON.stringify(createObj))
                 return JSON.stringify(createObj)
 
             }

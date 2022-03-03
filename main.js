@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadKeyboard()
     initTime()
     loadWord()
-    //leerarchivo("./words/WordSolution.txt")
+   // leerarchivo("./words/WordSolution.txt")
 })
 
 // oportunidades
