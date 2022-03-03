@@ -13,6 +13,8 @@ const modalBG = document.getElementById('modal')
 const modalInstruction = document.getElementById('modal_instruction')
 const modalEndGame = document.getElementById('modal-endgame')
 const one = document.querySelector(".fas");
+const iconsFooter = document.querySelectorAll('.icons')
+const [footer] = document.getElementsByClassName('footer')
 
 // lee localstorage
 function readLocalStorage(){
@@ -47,13 +49,17 @@ function styleDarkMode(){
     mode.classList.toggle("changeBg");
 
     // instruction
-
     instruction.classList.toggle('dark_icon')
     modalBG.classList.toggle('modal-bg')
     modalInstruction.classList.toggle('modal_instruction_dark')
 
     //end game
     modalEndGame.classList.toggle('dark_font')
+
+    //footer
+    iconsFooter.forEach(icon => icon.classList.toggle('icons-dark-mode'))
+    footer.classList.toggle('dark_font')
+    footer.classList.toggle('border-dark')
 }
 
 
