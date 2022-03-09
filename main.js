@@ -44,7 +44,6 @@ async function validateWord(word){
     // desencripta la solución
     const solutionWord = await localStorage.getItem('solution')
     const WORD = await decrypt(solutionWord)
-    console.log(WORD)
 
     // separación de la palabra correcta
     const splitWord = WORD.split('')
@@ -128,7 +127,6 @@ async function validateGame(userWord, WORD){
 
         //modal
         await endGame(newWordObj)
-        
         // reinicia objeto y contador
         chance = 1
         wordObj = {}

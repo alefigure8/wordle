@@ -295,7 +295,7 @@ export async function endGame(wordObj){
      percent()
 
     //lineas jugadas
-    lines()
+    lines(wordObj)
 }
 
 // renderiza el tiempo transcurrido en el modal final
@@ -338,7 +338,7 @@ function squareCells (numb){
    return squares.join('')
 }
 
-function lines(){
-    const words = JSON.parse(localStorage.getItem('board'))
-    linesPlay.innerText = words.length
+function lines(wordsObj){
+    const linesLength = Object.keys(wordsObj).length
+    linesPlay.innerText = linesLength
 }
