@@ -10,4 +10,4 @@ En lugar de traer una palabra al día, se puede  jugar de vuelta la cantidad de 
 
 Por el momento cuenta con cerca de 200, por lo que estaría faltando la validación de palabras inexistentes.
 
-<img serc="https://i.imgur.com/3BydQzp.jpeg" alt="Wordles IMG"/>
+<a href="https://wordle-tan.vercel.app/" title="video text"><img src="https://i.imgur.com/3BydQzp.jpeg" width="800"></a>
