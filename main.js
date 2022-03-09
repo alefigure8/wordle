@@ -1,37 +1,39 @@
-import {loadModal, endGame} from './helpers/modal.js'
-import {loadDarkMode} from './helpers/dark_mode.js'
-import {loadKeyboard, disableKeyboard} from './helpers/keyboard.js'
-import {readLocalStorage, points} from './helpers/localStorage.js'
-import {initTime, endTime} from './helpers/timer.js'
-import {decrypt} from './helpers/crypt.js'
-import {loadWord} from './helpers/fetch.js'
-import {leerarchivo} from './words/function.js'
+import {loadModal, endGame} from './helpers/modal.js';
+import {loadDarkMode} from './helpers/dark_mode.js';
+import {loadKeyboard, disableKeyboard} from './helpers/keyboard.js';
+import {readLocalStorage, points} from './helpers/localStorage.js';
+import {initTime, endTime} from './helpers/timer.js';
+import {decrypt} from './helpers/crypt.js';
+import {loadWord} from './helpers/fetch.js';
+import {leerarchivo} from './words/function.js';
 
-// loaded
+// iniciadores
 document.addEventListener('DOMContentLoaded', () => {
-    loadModal()
-    loadDarkMode()
-    readLocalStorage()
-    loadKeyboard()
-    initTime()
-    loadWord()
-   // leerarchivo("./words/WordSolution.txt")
-})
+    loadModal();
+    loadDarkMode();
+    readLocalStorage();
+    loadKeyboard();
+    initTime();
+    loadWord();
+
+    // Función para leer archivo txt por donde se cargan más palabras. La idea es llevarlo a Backend en el futuro.
+   // leerarchivo("./words/WordSolution.txt");
+});
 
 // oportunidades
-let chance = 1;
+let chance = 1;;
 
 // objeto contenedor de palabras elegidas por usuario
-let wordObj ={}
+let wordObj ={};
 
 // guarda palabra en objeto
 export function entryWord(userWord){
 
     // coloca palabra en el objeto
-    wordObj[userWord] = {word: userWord}
+    wordObj[userWord] = {word: userWord};
 
     // Validación de la palabra elegida
-    return validateWord(userWord)
+    return validateWord(userWord);
 }
 
 
@@ -63,7 +65,7 @@ async function validateWord(word){
                 wordObj[word].correct = [{letter: splitUserWord[i], index: i}]
                 :
                 // concatena con array existente
-                wordObj[word].correct = [...wordObj[word].correct, {letter: splitUserWord[i], index: i}]
+                wordObj[word].correct = [...wordObj[word].correct, {letter: splitUserWord[i], index: i}];
 
         } else if (indexWord !== -1){
 
@@ -72,7 +74,7 @@ async function validateWord(word){
                 ?
                 wordObj[word].position = [{letter: splitUserWord[i], index: i}]
                 :
-                wordObj[word].position = [...wordObj[word].position, {letter: splitUserWord[i], index: i}]
+                wordObj[word].position = [...wordObj[word].position, {letter: splitUserWord[i], index: i}];
 
         } else {
 
@@ -81,21 +83,21 @@ async function validateWord(word){
                 ?
                 wordObj[word].wrong = [{letter: splitUserWord[i], index: i}]
                 :
-                wordObj[word].wrong = [...wordObj[word].wrong, {letter: splitUserWord[i], index: i}]
+                wordObj[word].wrong = [...wordObj[word].wrong, {letter: splitUserWord[i], index: i}];
 
         }
     }
 
     // validación
     if(chance < 6 && !Object.keys(wordObj).includes(WORD)) {
-        chance += 1
-        validateGame(wordObj[word], WORD)
+        chance += 1;
+        validateGame(wordObj[word], WORD);
     } else {
-        validateGame(wordObj[word], WORD)
-    }
+        validateGame(wordObj[word], WORD);
+    };
 
     // guardar palabra actual con sus detalles
-    return wordObj[word]
+    return wordObj[word];
 }
 
 
@@ -104,31 +106,31 @@ async function validateGame(userWord, WORD){
     // Palabra correcta, ganó
     if (chance < 6 && userWord.word === WORD){
         // copaia objeto
-        const newWordObj = JSON.parse(JSON.stringify(wordObj))
-        await points(true)
-        endTime()
-        disableKeyboard()
+        const newWordObj = JSON.parse(JSON.stringify(wordObj));
+        await points(true);
+        endTime();
+        disableKeyboard();
 
-        //modal
-        await endGame(newWordObj)
+        //modal final
+        await endGame(newWordObj);
 
         // reinicia objeto y contador
-        chance = 1
-        wordObj = {}
-    }
+        chance = 1;
+        wordObj = {};
+    };
 
     // Perdió
     if (chance > 5 ){
         // copaia objeto
-        const newWordObj = JSON.parse(JSON.stringify(wordObj))
-        await points(false)
-        endTime()
-        disableKeyboard()
+        const newWordObj = JSON.parse(JSON.stringify(wordObj));
+        await points(false);
+        endTime();
+        disableKeyboard();
 
         //modal
-        await endGame(newWordObj)
+        await endGame(newWordObj);
         // reinicia objeto y contador
-        chance = 1
-        wordObj = {}
-    }
+        chance = 1;
+        wordObj = {};
+    };
 }
